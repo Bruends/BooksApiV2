@@ -1,0 +1,17 @@
+{
+    "name": "bruno/bookshelf-api",
+    "description": "php version of the bookshelf api",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BookshelfApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bruno Mendes"            
+        }
+    ],
+    "require": {}
+}
