@@ -3,10 +3,22 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use BookshelfApi\Model\BookModel;
 use BookshelfApi\Classes\Book;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
 
+require __DIR__ . '/vendor/autoload.php';
 
-$book = new Book("test", "teste", "teste", null, "38");
+$app = AppFactory::create();
 
-BookModel::delete("38");
+$app->get('/', function (Request $request, Response $response, $args) {
+    $jsonBooks = json_encode(BookModel::getAll());
 
-print_r(BookModel::getById("38"));
+    $response
+        ->getBody()
+        ->write($jsonBooks);
+
+    return $response->withHeader('Content-type', 'application/json');;
+});
+
+$app->run();
