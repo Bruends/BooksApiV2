@@ -5,11 +5,8 @@ use BookshelfApi\Model\BookModel;
 use BookshelfApi\Classes\Book;
 
 
-var_dump(BookModel::getAll());
-echo "====\n";
+$book = new Book("test", "teste", "teste", null, "38");
 
-$test = new Book("Um dia serei Feliz", "ou sera q não", "bruno");
+BookModel::delete("38");
 
-BookModel::save($test);
-
-var_dump(BookModel::getAll());
+print_r(BookModel::getById("38"));
