@@ -18,8 +18,7 @@ class BookController
             ->getBody()
             ->write($jsonBooks);
 
-        return $response
-            ->withHeader("Content-Type", "application/json");
+        return $response->withHeader("Content-Type", "application/json");
     }
 
     public static function getById(Request $request, Response $response, $args) {
@@ -29,8 +28,7 @@ class BookController
             ->getBody()
             ->write($jsonBook);
 
-        return $response
-            ->withHeader("Content-Type", "application/json");
+        return $response->withHeader("Content-Type", "application/json");
 
 
     }
@@ -42,6 +40,42 @@ class BookController
 
         // uploading book cover
         $uploadedBookCover = $request->getUploadedFiles()["img"];
+
+        $imgPath = self::uploadImgAndReturnPath($uploadedBookCover);
+        $newBook->__set("imgPath", $imgPath);
+
+
+        // saving book on DB
+        BookModel::save($newBook);
+
+
+        return $response->withStatus(201);
+    }
+
+    public static function delete(Request $request, Response $response, $args) {
+        $id = $request->getParsedBody()["id"];
+
+        $bookToDelete = BookModel::getById($id);
+
+        if(isset($bookToDelete)){
+            // removing book cover
+            $imgPath = $bookToDelete["imgPath"];
+            if(isset($imgPath))
+                unlink( __DIR__ . "/../../$imgPath");
+
+            // deleting book
+            BookModel::delete($id);
+
+            return $response->withStatus(200);
+        }
+
+    }
+
+
+
+    // upload a book cover and return it's path
+    public static function uploadImgAndReturnPath($uploadedBookCover){
+        // uploading book cover
         if(isset($uploadedBookCover)) {
             // generating a new name for the img
             $tempName = $uploadedBookCover->getClientFilename();
@@ -53,17 +87,11 @@ class BookController
             $uploadedBookCover
                 ->moveTo($path);
 
-            // adding the cover imgPath to book
-            $newBook->__set("imgPath", "uploads/" . $newName);
+            return "uploads/$newName";
         }
 
-        // saving book on DB
-        BookModel::save($newBook);
-
-
-        $response
-            ->withStatus(201);
-
-        return $response;
+        return null;
     }
 }
+
+

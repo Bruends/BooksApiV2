@@ -2,6 +2,7 @@
 
 namespace BookshelfApi\Classes;
 
+
 class Book
 {
     private $id;

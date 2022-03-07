@@ -11,6 +11,8 @@ use Slim\Factory\AppFactory;
 
 $app = AppFactory::create();
 
+$app->addBodyParsingMiddleware();
+
 // enabling CORS
 $app->add(function(Request $request, RequestHandler $handler){
 
@@ -32,9 +34,8 @@ $app->post('/books', function(Request $request, Response $response){
     return BookController::save($request, $response);
 });
 
-$app->options('/{routes:.+}', function ($request, $response, $args) {
-    return $response;
+$app->delete('/books', function(Request $request, Response $response, $args){
+    return BookController::delete($request, $response, $args);
 });
-
 
 $app->run();
