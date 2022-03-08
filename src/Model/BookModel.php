@@ -80,6 +80,20 @@ class BookModel
         }
     }
 
+    public static function updateBookCover(Book $book) {
+        try{
+            $query = "UPDATE books SET imgPath = ? WHERE id = ?";
+            $con = Connection::create();
+            $state = $con->prepare($query);
+            $state->execute([
+                $book->__get("imgPath"),
+                $book->__get("id")
+            ]);
+        } catch(PDOException $error) {
+            throw $error;
+        }
+    }
+
 
     public static function delete($id) {
         try{

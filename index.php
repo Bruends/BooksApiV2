@@ -12,6 +12,8 @@ use Slim\Factory\AppFactory;
 $app = AppFactory::create();
 
 $app->addBodyParsingMiddleware();
+$app->addRoutingMiddleware();
+$app->addErrorMiddleware(true, true, true);
 
 // enabling CORS
 $app->add(function(Request $request, RequestHandler $handler){
@@ -19,7 +21,9 @@ $app->add(function(Request $request, RequestHandler $handler){
     $response = $handler->handle($request);
 
     return $response
-        ->withHeader("Access-Control-Allow-Origin", "*");
+        ->withHeader("Access-Control-Allow-Origin", "*")
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
 
 $app->get('/books', function (Request $request, Response $response) {
@@ -34,8 +38,16 @@ $app->post('/books', function(Request $request, Response $response){
     return BookController::save($request, $response);
 });
 
-$app->delete('/books', function(Request $request, Response $response, $args){
+$app->post('/books/newCover/{id}', function(Request $request, Response $response, $args){
+    return BookController::updateBookCover($request, $response, $args);
+});
+
+$app->delete('/books/{id}', function(Request $request, Response $response, $args){
     return BookController::delete($request, $response, $args);
+});
+
+$app->put('/books', function(Request $request, Response $response){
+    return BookController::update($request, $response);
 });
 
 $app->run();
