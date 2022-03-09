@@ -2,20 +2,20 @@
 
 rewriting [this api](https://github.com/BrunoMendes41/simple-php-restful-api) and adding upload files support.
 
-# Techs 
+## Techs 
 - PHP
 - Mysql
 - Composer
 - Slim
 
-# Studied concepts
+## Studied concepts
 - PHP psr-4 (autoload with composer)
 - namespaces
 - OOP
 - manage dependencies with composer
 - img Upload with slim
 
-### installing and running:
+## installing and running:
 
 - first check if you have `php >= 7.4`, `mysql` and `composer` installed  
 and if the app is running in a `Web server with URL rewriting`
