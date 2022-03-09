@@ -1,6 +1,6 @@
 # Books api v2
 
-rewriting [this api](https://github.com/BrunoMendes41/simple-php-restful-api), and adding upload files support.
+rewriting [this api](https://github.com/BrunoMendes41/simple-php-restful-api) and adding upload files support.
 
 # Techs 
 - PHP
