@@ -13,7 +13,7 @@ class BookRoutes
             return BookController::getAll($request, $response);
         });
 
-        $app->get('/books/find/{id}', function (Request $request, Response $response, $args) {
+        $app->get('/books/{id}', function (Request $request, Response $response, $args) {
             return BookController::getById($request, $response, $args);
         });
 
