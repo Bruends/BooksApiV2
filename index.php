@@ -14,8 +14,9 @@ $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
+// adding middlewares
 $app = BookMiddlewares::addMiddlewares($app);
-
+// adding routes
 $app = BookRoutes::addRoutes($app);
 
 $app->run();

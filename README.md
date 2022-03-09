@@ -1,7 +1,19 @@
 # Books api v2
 
-CRUD rest api with slim php and mysql
-rewriting (this api)[https://github.com/BrunoMendes41/simple-php-restful-api], and adding upload files support.
+rewriting [this api](https://github.com/BrunoMendes41/simple-php-restful-api), and adding upload files support.
+
+# Techs 
+- PHP
+- Mysql
+- Composer
+- Slim
+
+# Studied concepts
+- PHP psr-4 (autoload with composer)
+- namespaces
+- OOP
+- manage dependencies with composer
+- img Upload with slim
 
 ### installing and running:
 
@@ -66,7 +78,7 @@ and send the new image in a `multipart/form-data`
 ```
 img (image type file, optional)
 ```
-to remove the book img send a request to this endpoint with an empty `img` field 
+to remove the book img, send a request to this endpoint with an empty `img` field 
 
 
 #### PUT
