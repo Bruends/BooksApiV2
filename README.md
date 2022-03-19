@@ -22,7 +22,7 @@ and if the app is running in a `Web server with URL rewriting`
 
 - then clone the repo:
 ```bash
-git clone https://github.com/BrunoMendes41/BooksApiV2
+git clone https://github.com/Bruends/BooksApiV2
 ```
 
 - create a database in sql and execute the queries in the `books.sql` file to create the table.
